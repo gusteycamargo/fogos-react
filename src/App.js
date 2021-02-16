@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Firework, Explosion } from './styles.js'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  function generateFirework(left, top, scale, color) {
+    return (
+      <Firework left={left} top={top} transform={`scale(${scale})`}>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+        <Explosion color={color}/>
+      </Firework>
+    )
+  }
+
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  function renderFirework() {
+    let divs = []
+    for (let i = 0; i < 35; i++) {
+      let firework = generateFirework(`${(Math.floor(Math.random() * 89) + 10)}%`, `${(Math.floor(Math.random() * 65) + 10)}%`, (Math.floor(Math.random() * 15) + 1) / 10, getRandomColor())
+      divs.push(firework)
+    }
+    return divs
+  }
+
+  return (<>
+    {renderFirework().map(firework => (
+      firework
+    ))}
+  </>);
 }
 
 export default App;
