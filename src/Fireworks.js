@@ -1,7 +1,7 @@
 import React from 'react'
-import { Firework, Explosion } from './styles.js'
+import { Firework, Explosion, Container } from './styles.js'
 
-function App() {
+function Fireworks() {
   function generateFirework(left, top, scale, color) {
     return (
       <Firework left={left} top={top} transform={`scale(${scale})`}>
@@ -39,11 +39,13 @@ function App() {
     return divs
   }
 
-  return (<>
-    {renderFirework().map(firework => (
-      firework
-    ))}
-  </>);
+  return (
+    <Container>
+      {renderFirework().map(firework => (
+        firework
+      ))}
+    </Container>
+  );
 }
 
-export default App;
+export default Fireworks;

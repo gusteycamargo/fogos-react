@@ -11,6 +11,11 @@ const explosion = keyframes`
         top: -50%;
     }
 `
+export const Container = styled.div`
+    background-color: #000;
+    width: 100vw;
+    height: 100vh;
+`;
 
 export const Firework = styled.div`
     position: absolute;
