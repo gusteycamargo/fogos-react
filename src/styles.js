@@ -13,15 +13,78 @@ const explosion = keyframes`
 `
 export const Container = styled.div`
     background-color: #000;
+    min-width: 100vw;
+    min-height: 100vh;
+    padding: 16px;
+`;
+
+export const InputChoose = styled.input`
+    height: 40px;
+    border-radius: 8px;
+    width: 350px;
+    padding-left: 15px;
+    border: none;
+    -webkit-box-shadow: -1px 0px 15px 3px rgba(0,0,0,0.45); 
+    box-shadow: -1px 0px 15px 3px rgba(0,0,0,0.45);
+`
+
+export const ContainerChoose = styled.div`
+    background-color: #242427;
     width: 100vw;
     height: 100vh;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`;
+
+export const ButtonConfirm = styled.button`
+    width: 365px;
+    height: 40px;
+    background-color: #451776;
+    margin-top: 16px;
+    border-radius: 8px;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    -webkit-box-shadow: -1px 0px 15px 3px rgba(0,0,0,0.45); 
+    box-shadow: -1px 0px 15px 3px rgba(0,0,0,0.45);
+    cursor: pointer;
+`;
+
+export const ButtonEdit = styled.button`
+    background-color: #fff;
+    display: flex;
+    border: none;
+    align-self: flex-end;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+`;
+
+export const Title = styled.h1`
+    font-family: sans-serif;
+    color: #fff;
+`;
+
+export const FormInputs = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const Firework = styled.div`
     position: absolute;
-    left: ${props => props.left};
-    top: ${props => props.top};
-    transform: ${props => props.transform};
+    left: ${props => props.left || 0}%;
+    top: ${props => props.top || 0}%;
+    transform: scale(${props => props.transform || 0});
 `;
 
 export const Explosion = styled.div`

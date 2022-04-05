@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Fireworks from './Fireworks';
+import Choose from './Choose';
 import "./styles/index.css"
 
 ReactDOM.render(
   <React.StrictMode>
-    <Fireworks />
+    <Choose/>
   </React.StrictMode>,
   document.getElementById('root')
 );

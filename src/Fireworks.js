@@ -1,10 +1,13 @@
-import React from 'react'
-import { Firework, Explosion, Container } from './styles.js'
+import React, { useCallback, useState, useEffect } from 'react'
+import { Firework, Explosion, Container, ButtonEdit } from './styles.js'
+import { BsFillPencilFill } from "react-icons/bs"
 
-function Fireworks() {
+function Fireworks({ numberOfFireworks = 0, setEditing }) {
+  const [fireworks, setFireworks] = useState([])
+
   function generateFirework(left, top, scale, color) {
     return (
-      <Firework left={left} top={top} transform={`scale(${scale})`}>
+      <Firework left={left} top={top} transform={scale}>
         <Explosion color={color}/>
         <Explosion color={color}/>
         <Explosion color={color}/>
@@ -22,26 +25,50 @@ function Fireworks() {
   }
 
   function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
   }
 
-  function renderFirework() {
-    let divs = []
-    for (let i = 0; i < 35; i++) {
-      let firework = generateFirework(`${(Math.floor(Math.random() * 89) + 10)}%`, `${(Math.floor(Math.random() * 65) + 10)}%`, (Math.floor(Math.random() * 15) + 1) / 10, getRandomColor())
+  const generateFireworks = useCallback(() => {
+    const divs = []
+    for (let i = 0; i < numberOfFireworks; i++) {
+      const left = Math.floor(Math.random() * 89) + 10
+      const top = Math.floor(Math.random() * 65) + 10
+      const scale = (Math.floor(Math.random() * 15) + 1) / 10
+      const color = getRandomColor();
+
+      const firework = generateFirework(left, top, scale, color)
       divs.push(firework)
     }
-    return divs
+
+    setFireworks(divs)
+  }, [numberOfFireworks])
+
+  function handleClickEdit() {
+    setEditing(true)
   }
+
+  useEffect(() => {
+    if(numberOfFireworks > 0) {
+      generateFireworks()
+    }
+  }, [numberOfFireworks, generateFireworks])
+
+  useEffect(() => {
+    return () => setFireworks([])
+  }, [])
 
   return (
     <Container>
-      {renderFirework().map(firework => (
+      <ButtonEdit onClick={handleClickEdit}>
+        <BsFillPencilFill color='#242427' size={22}/>
+      </ButtonEdit>
+
+      {fireworks.map(firework => (
         firework
       ))}
     </Container>
